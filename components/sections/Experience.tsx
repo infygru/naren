@@ -32,7 +32,7 @@ export default function Experience() {
           title="Where I've "
           highlight="Worked"
           description="From UI/UX designer to Lead Solutions Architect — a decade of shipping high-performance platforms for international brands."
-          className="mb-20"
+          className="mb-10 sm:mb-20"
           align="left"
         />
 
@@ -45,7 +45,7 @@ export default function Experience() {
             aria-hidden="true"
           />
 
-          <div className="space-y-16">
+          <div className="space-y-10 lg:space-y-16">
             {EXPERIENCES.map((exp, idx) => {
               const acc = ACCENTS[idx % ACCENTS.length];
 

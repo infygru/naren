@@ -57,7 +57,7 @@ export default function Testimonials() {
 
         {/* Section label */}
         <motion.p
-          className="label-mono text-center mb-16"
+          className="label-mono text-center mb-10 sm:mb-16"
           initial={{ opacity: 0, y: 8 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -78,7 +78,7 @@ export default function Testimonials() {
             >
               {/* Opening quote mark — decorative */}
               <div
-                className="text-7xl font-black leading-none select-none mb-4"
+                className="text-5xl sm:text-7xl font-black leading-none select-none mb-4"
                 style={{
                   fontFamily: "var(--font-bricolage), sans-serif",
                   background: "linear-gradient(135deg, var(--violet), var(--pink))",
@@ -106,7 +106,7 @@ export default function Testimonials() {
               </blockquote>
 
               {/* Author info */}
-              <div className="mt-8 flex items-center gap-4">
+              <div className="mt-6 sm:mt-8 flex flex-wrap items-center gap-4">
                 <div
                   className="w-12 h-12 rounded-2xl flex items-center justify-center text-white font-bold flex-shrink-0"
                   style={{

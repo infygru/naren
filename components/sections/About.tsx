@@ -41,7 +41,7 @@ export default function About() {
 
         {/* Section label */}
         <motion.p
-          className="label-mono mb-16"
+          className="label-mono mb-10 sm:mb-16"
           initial={{ opacity: 0, y: 8 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -50,10 +50,10 @@ export default function About() {
         </motion.p>
 
         {/* Two-column: giant metrics LEFT, bio text RIGHT */}
-        <div className="grid lg:grid-cols-2 gap-16 items-start">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
 
           {/* Left — giant stacked numbers */}
-          <div ref={ref} className="space-y-8">
+          <div ref={ref} className="space-y-5 sm:space-y-8">
             {BIG_STATS.map((stat, i) => (
               <motion.div
                 key={stat.label}
@@ -61,12 +61,12 @@ export default function About() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, duration: 0.6, ease: [0.19, 1, 0.22, 1] }}
-                className="flex items-baseline gap-5 group"
+                className="flex items-baseline gap-3 sm:gap-5 group"
               >
                 {/* Number */}
                 <div
                   className="display-text leading-none select-none"
-                  style={{ fontSize: "clamp(3rem, 6vw, 4.5rem)", color: stat.color }}
+                  style={{ fontSize: "clamp(2rem, 7vw, 4.5rem)", color: stat.color }}
                 >
                   {inView ? (
                     <CountUp
@@ -101,7 +101,7 @@ export default function About() {
           </div>
 
           {/* Right — bio + what I do + education */}
-          <div className="space-y-10">
+          <div className="space-y-8 sm:space-y-10">
 
             {/* Bio */}
             <div className="space-y-4">

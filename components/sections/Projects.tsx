@@ -61,7 +61,7 @@ function FeaturedCard({ project, index, onClick }: { project: Project; index: nu
       whileHover={{ borderColor: acc.bd }}
     >
       {/* Screenshot header — browser mockup */}
-      <div className="relative overflow-hidden" style={{ height: "220px", background: grad }}>
+      <div className="relative overflow-hidden" style={{ height: "180px", background: grad }}>
         {/* Browser chrome bar */}
         <div
           className="absolute top-0 left-0 right-0 z-10 flex items-center gap-2 px-4 py-2.5"
@@ -131,7 +131,7 @@ function FeaturedCard({ project, index, onClick }: { project: Project; index: nu
       </div>
 
       {/* Content */}
-      <div className="p-6 grid sm:grid-cols-2 gap-6">
+      <div className="p-4 sm:p-6 grid sm:grid-cols-2 gap-5 sm:gap-6">
         <div className="space-y-3">
           <div>
             <h3 className="text-xl font-bold" style={{ color: "var(--text-1)", fontFamily: "var(--font-bricolage), sans-serif" }}>
@@ -436,7 +436,7 @@ export default function Projects() {
           title="Things I've "
           highlight="Built"
           description="Real platforms, real users, real impact. Each project solves a hard problem at scale."
-          className="mb-12"
+          className="mb-8 sm:mb-12"
         />
 
         {/* Filter pills */}

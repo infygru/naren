@@ -65,8 +65,8 @@ export default function Hero() {
         aria-hidden="true"
       />
 
-      <div className="relative z-10 w-full max-w-6xl mx-auto px-5 sm:px-8 pt-32 pb-20">
-        <div className="grid lg:grid-cols-[1fr_420px] gap-12 xl:gap-20 items-center">
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-5 sm:px-8 pt-24 sm:pt-32 pb-16 sm:pb-20">
+        <div className="grid lg:grid-cols-[1fr_420px] gap-10 xl:gap-20 items-center">
 
           {/* ── LEFT: Text content ── */}
           <motion.div
@@ -94,13 +94,13 @@ export default function Hero() {
             <motion.div variants={item}>
               <h1
                 className="display-text"
-                style={{ fontSize: "clamp(2.8rem, 6.5vw, 5.2rem)", color: "var(--text-1)", lineHeight: 0.9 }}
+                style={{ fontSize: "clamp(2rem, 11vw, 5.2rem)", color: "var(--text-1)", lineHeight: 0.9 }}
               >
                 NARENDRAN
               </h1>
               <h1
                 className="display-text gradient-text"
-                style={{ fontSize: "clamp(2.8rem, 6.5vw, 5.2rem)", lineHeight: 0.9 }}
+                style={{ fontSize: "clamp(2rem, 11vw, 5.2rem)", lineHeight: 0.9 }}
               >
                 C.
               </h1>
@@ -117,7 +117,7 @@ export default function Hero() {
             {/* Role */}
             <motion.p
               variants={item}
-              className="text-xl font-semibold"
+              className="text-base sm:text-xl font-semibold"
               style={{ color: "var(--text-2)", letterSpacing: "-0.02em" }}
             >
               Lead Solutions Architect

@@ -79,7 +79,7 @@ export default function Footer() {
           </div>
 
           {/* Nav links */}
-          <nav aria-label="Footer navigation" className="flex gap-12 sm:gap-16">
+          <nav aria-label="Footer navigation" className="flex gap-8 sm:gap-16">
             <div>
               <p className="label-mono mb-4">Navigate</p>
               <ul className="space-y-2.5" role="list">

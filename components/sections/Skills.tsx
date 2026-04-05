@@ -54,7 +54,7 @@ export default function Skills() {
           title="Where I "
           highlight="Specialize"
           description="A decade of hands-on mastery across the full technology stack — frontend to infrastructure."
-          className="mb-14"
+          className="mb-10 sm:mb-14"
         />
 
         {/* Horizontal category tabs */}
@@ -71,7 +71,7 @@ export default function Skills() {
                 aria-selected={isActive}
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
-                className="flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-200"
+                className="flex items-center gap-2 px-3 py-2 sm:px-5 sm:py-2.5 rounded-full text-sm font-medium transition-all duration-200"
                 style={isActive ? {
                   background: ca.dim,
                   border: `1px solid ${ca.bd}`,
@@ -100,14 +100,14 @@ export default function Skills() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.3 }}
-            className="rounded-2xl p-8"
+            className="rounded-2xl p-4 sm:p-8"
             style={{
               background: "var(--bg-card)",
               border: "1px solid var(--border)",
             }}
           >
             {/* Panel header */}
-            <div className="flex items-center justify-between mb-8">
+            <div className="flex items-center justify-between mb-5 sm:mb-8">
               <div className="flex items-center gap-3">
                 {(() => {
                   const Icon = ICONS[cat.icon] || Monitor;

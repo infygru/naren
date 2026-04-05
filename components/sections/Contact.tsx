@@ -41,7 +41,12 @@ export default function Contact() {
   const onSubmit = async (data: FormData) => {
     setSubmitting(true);
     try {
-      await new Promise((r) => setTimeout(r, 1400));
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      if (!res.ok) throw new Error("send_failed");
       setDone(true);
       reset();
       toast.success("Message sent! I'll be in touch within 24 hours.");
@@ -59,14 +64,14 @@ export default function Contact() {
       aria-labelledby="contact-heading"
     >
       {/* Split layout — no section-padding, handled per column */}
-      <div className="grid lg:grid-cols-2 min-h-[700px]">
+      <div className="grid lg:grid-cols-2 lg:min-h-[700px]">
 
         {/* LEFT HALF — dark with big text */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
-          className="relative flex flex-col justify-center px-8 sm:px-12 lg:px-16 py-20"
+          className="relative flex flex-col justify-center px-5 sm:px-10 lg:px-16 py-12 sm:py-16 lg:py-20"
           style={{ background: "var(--bg)" }}
         >
           {/* Glow */}
@@ -182,11 +187,8 @@ export default function Contact() {
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.1 }}
-          className="flex flex-col justify-center px-8 sm:px-12 lg:px-16 py-20"
-          style={{
-            background: "var(--bg-2)",
-            borderLeft: "1px solid var(--border)",
-          }}
+          className="flex flex-col justify-center px-5 sm:px-10 lg:px-16 py-12 sm:py-16 lg:py-20 border-t border-white/[0.09] lg:border-t-0 lg:border-l lg:border-white/[0.09]"
+          style={{ background: "var(--bg-2)" }}
         >
           <div className="max-w-md w-full mx-auto">
             {done ? (

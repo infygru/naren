@@ -80,7 +80,7 @@ export default function Architecture() {
         aria-hidden="true"
       />
 
-      <div className="container-wide space-y-20">
+      <div className="container-wide space-y-12 sm:space-y-20">
         <SectionHeader
           label="Architecture"
           title="How I Think About "
@@ -102,9 +102,9 @@ export default function Architecture() {
                   transition={{ delay: i * 0.08, duration: 0.55 }}
                   className="flex items-stretch group"
                 >
-                  {/* Left label — narrow column */}
+                  {/* Left label — hidden on mobile */}
                   <div
-                    className="w-36 sm:w-48 flex-shrink-0 flex items-center justify-end pr-5 py-4"
+                    className="hidden sm:flex w-36 sm:w-48 flex-shrink-0 items-center justify-end pr-5 py-4"
                     style={{ borderRight: `2px solid ${layer.accent}` }}
                   >
                     <div className="text-right">
@@ -117,9 +117,9 @@ export default function Architecture() {
                     </div>
                   </div>
 
-                  {/* Connector dot */}
+                  {/* Connector dot — hidden on mobile */}
                   <div
-                    className="flex-shrink-0 flex items-center"
+                    className="hidden sm:flex flex-shrink-0 items-center"
                     style={{ margin: "0 -5px", zIndex: 1 }}
                   >
                     <div
@@ -133,12 +133,13 @@ export default function Architecture() {
                     />
                   </div>
 
-                  {/* Right — content row */}
+                  {/* Right — content row (full-width on mobile) */}
                   <div
-                    className="flex-1 ml-5 py-4 px-5 rounded-xl transition-all duration-200"
+                    className="flex-1 sm:ml-5 py-3 sm:py-4 px-4 sm:px-5 rounded-xl transition-all duration-200"
                     style={{
                       background: "var(--bg-card)",
                       border: "1px solid var(--border)",
+                      borderLeft: `3px solid ${layer.accent}`,
                     }}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.borderColor = layer.bd;
@@ -149,13 +150,20 @@ export default function Architecture() {
                       e.currentTarget.style.background = "var(--bg-card)";
                     }}
                   >
+                    {/* Mobile-only: side label */}
+                    <p
+                      className="sm:hidden text-[10px] mb-1"
+                      style={{ color: "var(--text-3)", fontFamily: "var(--font-jetbrains), monospace" }}
+                    >
+                      {layer.side}
+                    </p>
                     <div className="flex items-center justify-between">
                       <div>
                         <p className="font-semibold text-sm" style={{ color: "var(--text-1)" }}>
                           {layer.label}
                         </p>
                         <p
-                          className="text-xs mt-0.5"
+                          className="text-xs mt-0.5 leading-snug"
                           style={{ color: "var(--text-3)", fontFamily: "var(--font-jetbrains), monospace" }}
                         >
                           {layer.sub}
@@ -170,10 +178,10 @@ export default function Architecture() {
                   </div>
                 </motion.div>
 
-                {/* Connecting line between rows */}
+                {/* Connecting line between rows — desktop only */}
                 {i < STACK_LAYERS.length - 1 && (
                   <div
-                    className="ml-[calc(9rem+1px)] sm:ml-[calc(12rem+1px)] h-4 w-px"
+                    className="hidden sm:block sm:ml-[calc(12rem+1px)] h-4 w-px"
                     style={{ background: `linear-gradient(180deg, ${layer.accent}, ${STACK_LAYERS[i + 1].accent})`, opacity: 0.4 }}
                     aria-hidden="true"
                   />
