@@ -2,9 +2,9 @@
 export const SITE_CONFIG = {
   name: "Narendran C",
   shortName: "Naren",
-  title: "Lead Solutions Architect & IT Operations",
+  title: "Freelance Lead Solutions Architect | Travel Tech · Next.js · n8n | UK · UAE · India",
   description:
-    "Lead Solutions Architect based in Chennai, India — specializing in Next.js, full-stack development, n8n workflow automation, and self-hosted infrastructure. 10+ years building high-performance digital platforms for international brands.",
+    "Hire Narendran C — Freelance Lead Solutions Architect with 10+ years building travel booking systems, GDPR-compliant platforms, and n8n workflow automation for UK, UAE, and India clients. Next.js expert. Based in Chennai, available remotely worldwide.",
   url: "https://naren.info",
   ogImage: "/og-image.png",
   twitterHandle: "@narendranc",
@@ -25,6 +25,30 @@ export const NAV_LINKS = [
   { label: "Architecture", href: "#architecture" },
   { label: "About",        href: "#about" },
   { label: "Contact",      href: "#contact" },
+];
+
+// ─── Service Pages ─────────────────────────────────────────────────────────
+export const SERVICE_PAGES = [
+  {
+    label: "Travel Tech Developer",
+    href: "/services/travel-tech",
+    description: "Next.js travel booking systems, tour operator portals & GDS integrations for UK, UAE & India.",
+  },
+  {
+    label: "n8n Automation",
+    href: "/services/n8n-automation",
+    description: "Workflow automation, CRM pipelines, AI agents — 3,915+ executions at 0% failure rate.",
+  },
+  {
+    label: "GDPR Web Development",
+    href: "/services/gdpr-web-development",
+    description: "UK GDPR-compliant platforms for healthcare, travel, and recruitment sectors.",
+  },
+  {
+    label: "Self-hosted Infrastructure",
+    href: "/services/self-hosted-infrastructure",
+    description: "Coolify, KVM VPS, Nginx — GDPR-friendly Vercel alternative with sub-30% CPU load.",
+  },
 ];
 
 // ─── Stats / Counters ─────────────────────────────────────────────────────

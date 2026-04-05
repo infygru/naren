@@ -38,6 +38,10 @@
 
   --glow-v:       0 0 60px rgba(157,127,244,0.2);
   --glow-p:       0 0 60px rgba(232,121,249,0.15);
+
+  /* ── Aliases used in service / blog pages ── */
+  --bg-base:       var(--bg);
+  --accent-primary: linear-gradient(135deg, var(--violet), var(--pink));
 }
 
 /* ─── Reset ───────────────────────────────────────────────────────────── */
@@ -260,6 +264,61 @@ body {
     animation: marquee 35s linear infinite;
   }
   .marquee-track:hover { animation-play-state: paused; }
+
+  /* ── Section headings (used in service + blog pages) ── */
+  .section-title {
+    font-family: var(--font-bricolage), sans-serif;
+    font-weight: 800;
+    font-size: clamp(1.75rem, 4vw, 2.75rem);
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    color: var(--text-1);
+  }
+  .label-text {
+    font-family: var(--font-jetbrains), monospace;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    color: var(--violet);
+    text-transform: uppercase;
+  }
+  .text-gradient {
+    background: linear-gradient(135deg, var(--violet), var(--pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* ── Blog / Article prose ── */
+  .prose-custom { color: var(--text-3); }
+  .blog-list {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--text-3);
+    line-height: 1.7;
+  }
+  .blog-list li::before { content: ""; }
+  .blog-link {
+    color: var(--violet);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color 0.15s;
+  }
+  .blog-link:hover { color: var(--pink); }
+  .prose-custom code {
+    font-family: var(--font-jetbrains), monospace;
+    font-size: 0.8em;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.1em 0.4em;
+    color: var(--cyan);
+  }
 
   /* ── Noise overlay ── */
   .noise-overlay {

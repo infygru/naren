@@ -1,17 +1,31 @@
 "use client";
 
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
-import { Menu, X, Download } from "lucide-react";
-import { NAV_LINKS, SITE_CONFIG } from "@/lib/constants";
+import { Menu, X, Download, ChevronDown } from "lucide-react";
+import Link from "next/link";
+import { NAV_LINKS, SITE_CONFIG, SERVICE_PAGES } from "@/lib/constants";
 
 export default function Navbar() {
-  const [isOpen, setIsOpen]        = useState(false);
-  const [scrolled, setScrolled]    = useState(false);
-  const [activeSection, setActive] = useState("");
+  const [isOpen, setIsOpen]            = useState(false);
+  const [scrolled, setScrolled]        = useState(false);
+  const [activeSection, setActive]     = useState("");
+  const [servicesOpen, setServicesOpen] = useState(false);
+  const servicesRef = useRef<HTMLLIElement>(null);
   const { scrollY } = useScroll();
 
   useMotionValueEvent(scrollY, "change", (v) => setScrolled(v > 40));
+
+  // Close services dropdown on outside click
+  useEffect(() => {
+    function handleClick(e: MouseEvent) {
+      if (servicesRef.current && !servicesRef.current.contains(e.target as Node)) {
+        setServicesOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, []);
 
   useEffect(() => {
     const ids = NAV_LINKS.map((l) => l.href.replace("#", ""));
@@ -30,10 +44,7 @@ export default function Navbar() {
       return observers;
     };
 
-    // First attempt immediately
     let observers = attach();
-
-    // Retry after dynamic sections have loaded
     const retryTimer = setTimeout(() => {
       observers.forEach((o) => o?.disconnect());
       observers = attach();
@@ -48,7 +59,6 @@ export default function Navbar() {
   const scrollTo = useCallback((href: string) => {
     const id = href.replace("#", "");
     setIsOpen(false);
-    // Small delay lets the mobile menu close before scrolling
     setTimeout(() => {
       const el = document.getElementById(id);
       if (el) {
@@ -133,6 +143,82 @@ export default function Navbar() {
                 </li>
               );
             })}
+
+            {/* Services dropdown */}
+            <li ref={servicesRef} className="relative">
+              <button
+                onClick={() => setServicesOpen((v) => !v)}
+                className="relative flex items-center gap-1 px-3.5 py-2 text-xs font-medium rounded-lg transition-all duration-150"
+                style={{ color: servicesOpen ? "var(--text-1)" : "var(--text-3)" }}
+                onMouseEnter={(e) => { if (!servicesOpen) e.currentTarget.style.color = "var(--text-2)"; }}
+                onMouseLeave={(e) => { if (!servicesOpen) e.currentTarget.style.color = servicesOpen ? "var(--text-1)" : "var(--text-3)"; }}
+                aria-expanded={servicesOpen}
+                aria-haspopup="true"
+              >
+                Services
+                <ChevronDown
+                  className="w-3 h-3 transition-transform duration-200"
+                  style={{ transform: servicesOpen ? "rotate(180deg)" : "rotate(0deg)" }}
+                />
+              </button>
+
+              <AnimatePresence>
+                {servicesOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -6 }}
+                    transition={{ duration: 0.15 }}
+                    className="absolute top-full left-0 mt-2 w-72 rounded-2xl overflow-hidden"
+                    style={{
+                      background: "rgba(28,31,54,0.98)",
+                      backdropFilter: "blur(20px)",
+                      border: "1px solid var(--border)",
+                      boxShadow: "0 16px 48px rgba(0,0,0,0.35)",
+                    }}
+                    role="menu"
+                  >
+                    <ul className="p-2 space-y-0.5">
+                      {SERVICE_PAGES.map((svc) => (
+                        <li key={svc.href}>
+                          <Link
+                            href={svc.href}
+                            onClick={() => setServicesOpen(false)}
+                            className="block px-4 py-3 rounded-xl transition-all"
+                            style={{ color: "var(--text-2)" }}
+                            onMouseEnter={(e) => {
+                              (e.currentTarget as HTMLElement).style.color = "var(--text-1)";
+                              (e.currentTarget as HTMLElement).style.background = "rgba(139,92,246,0.08)";
+                            }}
+                            onMouseLeave={(e) => {
+                              (e.currentTarget as HTMLElement).style.color = "var(--text-2)";
+                              (e.currentTarget as HTMLElement).style.background = "transparent";
+                            }}
+                            role="menuitem"
+                          >
+                            <p className="text-xs font-semibold">{svc.label}</p>
+                            <p className="text-xs mt-0.5" style={{ color: "var(--text-3)" }}>{svc.description}</p>
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </li>
+
+            {/* Blog */}
+            <li>
+              <Link
+                href="/blog"
+                className="relative px-3.5 py-2 text-xs font-medium rounded-lg transition-all duration-150 block"
+                style={{ color: "var(--text-3)" }}
+                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.color = "var(--text-2)"; }}
+                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.color = "var(--text-3)"; }}
+              >
+                Blog
+              </Link>
+            </li>
           </ul>
 
           {/* Right actions */}
@@ -204,6 +290,7 @@ export default function Navbar() {
             aria-label="Mobile menu"
           >
             <ul className="p-3 space-y-0.5">
+              {/* Anchor links */}
               {NAV_LINKS.map((link, i) => (
                 <motion.li
                   key={link.href}
@@ -228,10 +315,73 @@ export default function Navbar() {
                   </button>
                 </motion.li>
               ))}
+
+              {/* Services section */}
               <motion.li
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: NAV_LINKS.length * 0.04 + 0.05 }}
+                transition={{ delay: NAV_LINKS.length * 0.04 }}
+                className="pt-2"
+                style={{ borderTop: "1px solid var(--border)" }}
+              >
+                <p className="px-4 py-2 text-xs font-semibold uppercase tracking-widest" style={{ color: "var(--text-3)" }}>
+                  Services
+                </p>
+                <ul className="space-y-0.5">
+                  {SERVICE_PAGES.map((svc) => (
+                    <li key={svc.href}>
+                      <Link
+                        href={svc.href}
+                        onClick={() => setIsOpen(false)}
+                        className="block px-4 py-2.5 text-sm rounded-xl transition-all"
+                        style={{ color: "var(--text-2)" }}
+                        onMouseEnter={(e) => {
+                          (e.currentTarget as HTMLElement).style.color = "var(--text-1)";
+                          (e.currentTarget as HTMLElement).style.background = "rgba(139,92,246,0.08)";
+                        }}
+                        onMouseLeave={(e) => {
+                          (e.currentTarget as HTMLElement).style.color = "var(--text-2)";
+                          (e.currentTarget as HTMLElement).style.background = "transparent";
+                        }}
+                      >
+                        {svc.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </motion.li>
+
+              {/* Blog */}
+              <motion.li
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: (NAV_LINKS.length + SERVICE_PAGES.length) * 0.04 }}
+                className="pt-1"
+                style={{ borderTop: "1px solid var(--border)" }}
+              >
+                <Link
+                  href="/blog"
+                  onClick={() => setIsOpen(false)}
+                  className="block px-4 py-3 text-sm font-medium rounded-xl transition-all"
+                  style={{ color: "var(--text-2)" }}
+                  onMouseEnter={(e) => {
+                    (e.currentTarget as HTMLElement).style.color = "var(--text-1)";
+                    (e.currentTarget as HTMLElement).style.background = "rgba(139,92,246,0.08)";
+                  }}
+                  onMouseLeave={(e) => {
+                    (e.currentTarget as HTMLElement).style.color = "var(--text-2)";
+                    (e.currentTarget as HTMLElement).style.background = "transparent";
+                  }}
+                >
+                  Blog
+                </Link>
+              </motion.li>
+
+              {/* Resume CTA */}
+              <motion.li
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: (NAV_LINKS.length + SERVICE_PAGES.length + 1) * 0.04 + 0.05 }}
                 className="pt-2"
                 style={{ borderTop: "1px solid var(--border)" }}
               >

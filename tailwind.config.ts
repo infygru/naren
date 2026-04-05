@@ -26,6 +26,18 @@ const config: Config = {
         "text-1":   "#F1F0FF",
         "text-2":   "#9896B0",
         "text-3":   "#5C5A72",
+        // ── Ink scale (used in blog/service pages) ──
+        ink: {
+          100: "#DDE1F5",
+          200: "#B8BDD6",
+          300: "#9DA2C4",
+          400: "#8B90B8",
+          500: "#6C7196",
+          600: "#545878",
+          700: "#3E4260",
+          800: "#2C304A",
+          900: "#1E2138",
+        },
       },
       animation: {
         marquee:    "marquee 35s linear infinite",

@@ -2,7 +2,8 @@
 
 import { motion } from "framer-motion";
 import { Github, Linkedin, Twitter, Mail, ArrowUpRight } from "lucide-react";
-import { SITE_CONFIG, NAV_LINKS } from "@/lib/constants";
+import Link from "next/link";
+import { SITE_CONFIG, NAV_LINKS, SERVICE_PAGES } from "@/lib/constants";
 
 const SOCIALS = [
   { icon: Github,   label: "GitHub",   href: SITE_CONFIG.github },
@@ -19,7 +20,7 @@ export default function Footer() {
       aria-label="Site footer"
     >
       <div className="max-w-6xl mx-auto px-5 sm:px-8 py-14">
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-10">
+        <div className="flex flex-col md:flex-row items-start justify-between gap-10">
 
           {/* Brand */}
           <div className="space-y-4 max-w-xs">
@@ -36,16 +37,14 @@ export default function Footer() {
               >
                 N·
               </span>
-              <span
-                className="font-semibold text-sm"
-                style={{ color: "var(--text-2)" }}
-              >
+              <span className="font-semibold text-sm" style={{ color: "var(--text-2)" }}>
                 {SITE_CONFIG.name}
               </span>
             </div>
             <p className="text-sm leading-relaxed" style={{ color: "var(--text-3)" }}>
-              Lead Solutions Architect & IT Operations.
-              <br />Chennai, India.
+              Freelance Lead Solutions Architect.
+              <br />Travel Tech · n8n · Next.js
+              <br />UK · UAE · India · Remote
             </p>
             <div className="flex items-center gap-1.5">
               {SOCIALS.map(({ icon: Icon, label, href }) => (
@@ -78,8 +77,10 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Nav links */}
-          <nav aria-label="Footer navigation" className="flex gap-8 sm:gap-16">
+          {/* Nav columns */}
+          <nav aria-label="Footer navigation" className="flex flex-wrap gap-8 sm:gap-12">
+
+            {/* Navigate */}
             <div>
               <p className="label-mono mb-4">Navigate</p>
               <ul className="space-y-2.5" role="list">
@@ -101,9 +102,43 @@ export default function Footer() {
                     </a>
                   </li>
                 ))}
+                <li>
+                  <Link
+                    href="/blog"
+                    className="text-sm flex items-center gap-1 group transition-colors"
+                    style={{ color: "var(--text-3)" }}
+                    onMouseEnter={(e) => (e.currentTarget.style.color = "var(--text-1)")}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-3)")}
+                  >
+                    Blog
+                    <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" aria-hidden="true" />
+                  </Link>
+                </li>
               </ul>
             </div>
 
+            {/* Services */}
+            <div>
+              <p className="label-mono mb-4">Services</p>
+              <ul className="space-y-2.5" role="list">
+                {SERVICE_PAGES.map((svc) => (
+                  <li key={svc.href}>
+                    <Link
+                      href={svc.href}
+                      className="text-sm flex items-center gap-1 group transition-colors"
+                      style={{ color: "var(--text-3)" }}
+                      onMouseEnter={(e) => (e.currentTarget.style.color = "var(--text-1)")}
+                      onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-3)")}
+                    >
+                      {svc.label}
+                      <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" aria-hidden="true" />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Contact */}
             <div>
               <p className="label-mono mb-4">Contact</p>
               <div className="space-y-2.5">
@@ -117,6 +152,7 @@ export default function Footer() {
                   {SITE_CONFIG.email}
                 </a>
                 <p className="text-xs" style={{ color: "var(--text-3)" }}>{SITE_CONFIG.location}</p>
+                <p className="text-xs" style={{ color: "var(--text-3)" }}>Open to relocate — UK · UAE</p>
                 {SITE_CONFIG.availableForWork && (
                   <span className="inline-flex items-center gap-1.5 text-xs" style={{ color: "var(--green)" }}>
                     <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: "var(--green)" }} aria-hidden="true" />
@@ -125,6 +161,7 @@ export default function Footer() {
                 )}
               </div>
             </div>
+
           </nav>
         </div>
 
