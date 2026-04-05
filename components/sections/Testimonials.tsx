@@ -43,7 +43,7 @@ export default function Testimonials() {
     >
       {/* Glow */}
       <div
-        className="glow-blob w-[500px] h-[500px] opacity-10"
+        className="glow-blob w-[250px] h-[250px] sm:w-[500px] sm:h-[500px] opacity-10"
         style={{
           background: "radial-gradient(circle, var(--violet), transparent 65%)",
           top: "50%",

@@ -76,7 +76,7 @@ export default function Contact() {
         >
           {/* Glow */}
           <div
-            className="glow-blob w-[400px] h-[400px] opacity-15"
+            className="glow-blob w-[200px] h-[200px] sm:w-[400px] sm:h-[400px] opacity-15"
             style={{
               background: "radial-gradient(circle, var(--violet), transparent 70%)",
               top: "50%",

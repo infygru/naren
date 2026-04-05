@@ -44,13 +44,13 @@ export default function Hero() {
     >
       {/* Background glow blobs */}
       <div
-        className="glow-blob w-[700px] h-[700px] opacity-20"
-        style={{ background: "radial-gradient(circle, var(--violet), transparent 65%)", top: "-150px", left: "-150px" }}
+        className="glow-blob w-[300px] h-[300px] sm:w-[700px] sm:h-[700px] opacity-20"
+        style={{ background: "radial-gradient(circle, var(--violet), transparent 65%)", top: "-80px", left: "-80px" }}
         aria-hidden="true"
       />
       <div
-        className="glow-blob w-[500px] h-[500px] opacity-15"
-        style={{ background: "radial-gradient(circle, var(--pink), transparent 65%)", bottom: "-80px", right: "-80px" }}
+        className="glow-blob w-[250px] h-[250px] sm:w-[500px] sm:h-[500px] opacity-15"
+        style={{ background: "radial-gradient(circle, var(--pink), transparent 65%)", bottom: "-40px", right: "-40px" }}
         aria-hidden="true"
       />
 
